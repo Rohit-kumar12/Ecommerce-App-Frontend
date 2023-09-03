@@ -11,7 +11,11 @@ export default function PrivateRoute() {
 
   useEffect(() => {
     const authCheck = async () => {
-      const res = await api.get("/api/v1/auth/user-auth");
+      const auth = JSON.parse(localStorage.getItem("auth"));
+
+      const res = await api.get("/api/v1/auth/user-auth",{
+        headers: { authorization: auth?.token },
+      });
       if (res.data.ok) {
         setOk(true);
       } else {
