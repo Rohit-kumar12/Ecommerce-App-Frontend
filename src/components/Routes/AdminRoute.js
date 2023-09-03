@@ -5,7 +5,7 @@ import axios from "axios";
 import Spinner from "../Spinner";
 import { api } from "../../api";
 
-export default function PrivateRoute() {
+export default function AdminRoute() {
   const [ok, setOk] = useState(false);
   const [auth, setAuth] = useAuth();
 

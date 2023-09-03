@@ -43,7 +43,7 @@ const HomePage = () => {
       setLoading(true);
       const { data } = await api.get(`/api/v1/product/product-list/${page}`);
       setLoading(false);
-      setProducts(data.products);
+      setProducts(data?.products);
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -88,11 +88,11 @@ const HomePage = () => {
     setChecked(all);
   };
   useEffect(() => {
-    if (!checked.length || !radio.length) getAllProducts();
-  }, [checked.length, radio.length]);
+    if (!checked?.length || !radio?.length) getAllProducts();
+  }, [checked?.length, radio?.length]);
 
   useEffect(() => {
-    if (checked.length || radio.length) filterProduct();
+    if (checked?.length || radio?.length) filterProduct();
   }, [checked, radio]);
 
   //get filterd product
@@ -126,7 +126,7 @@ const HomePage = () => {
                 key={c._id}
                 onChange={(e) => handleFilter(e.target.checked, c._id)}
               >
-                {c.name}
+                {c?.name}
               </Checkbox>
             ))}
           </div>
@@ -136,7 +136,7 @@ const HomePage = () => {
             <Radio.Group onChange={(e) => setRadio(e.target.value)}>
               {Prices?.map((p) => (
                 <div key={p._id}>
-                  <Radio value={p.array}>{p.name}</Radio>
+                  <Radio value={p.array}>{p?.name}</Radio>
                 </div>
               ))}
             </Radio.Group>
@@ -162,16 +162,16 @@ const HomePage = () => {
                 />
                 <div className="card-body">
                   <div className="card-name-price">
-                    <h5 className="card-title">{p.name}</h5>
+                    <h5 className="card-title">{p?.name}</h5>
                     <h5 className="card-title card-price">
-                      {p.price.toLocaleString("en-US", {
+                      {p?.price.toLocaleString("en-US", {
                         style: "currency",
                         currency: "USD",
                       })}
                     </h5>
                   </div>
                   <p className="card-text ">
-                    {p.description.substring(0, 60)}...
+                    {p?.description?.substring(0, 60)}...
                   </p>
                   <div className="card-name-price">
                     <button
