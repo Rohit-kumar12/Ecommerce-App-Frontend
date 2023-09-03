@@ -11,10 +11,12 @@ export default function AdminRoute() {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const authCheck = async () => {
+      const auth = JSON.parse(localStorage.getItem("auth"));
+
       try {
         setLoading(true);
         const res = await api.get("/api/v1/auth/admin-auth", {
-          headers: { authorization: localStorage.getItem("auth")?.token },
+          headers: { authorization: auth?.token },
         });
         if (res.data.ok) {
           setOk(true);
