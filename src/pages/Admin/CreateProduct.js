@@ -39,6 +39,7 @@ const CreateProduct = () => {
   //create product function
   const handleCreate = async (e) => {
     e.preventDefault();
+    const auth = JSON.parse(localStorage.getItem("auth"));
     try {
       const productData = new FormData();
       productData.append("name", name);
@@ -47,10 +48,12 @@ const CreateProduct = () => {
       productData.append("quantity", quantity);
       productData.append("photo", photo);
       productData.append("category", category);
-      const { data } = api.post(
-        "/api/v1/product/create-product",
-        productData
-      );
+      const { data } = await api.post("/api/v1/product/create-product", productData, {
+        headers: {
+          authorization: auth?.token,
+          "Content-Type": "application/form-data",
+        },
+      });
       if (data?.success) {
         toast.error(data?.message);
       } else {
